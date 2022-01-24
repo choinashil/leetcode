@@ -1,7 +1,3 @@
-/**
- * @param {number[]} temperatures
- * @return {number[]}
- */
  var dailyTemperatures = function(temperatures) {
   const answer = [];
   let count = 0;
@@ -10,12 +6,12 @@
     const current = temperatures[i];
     
     for (let j = i + 1; j < temperatures.length; j++) {
+      count++;
+      
       if (current < temperatures[j]) {
-        answer.push(++count);
+        answer.push(count);
         count = 0;
         break;
-      } else {
-        count++;
       }
     }
 
