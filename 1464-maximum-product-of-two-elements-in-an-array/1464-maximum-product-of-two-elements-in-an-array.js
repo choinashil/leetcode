@@ -3,9 +3,6 @@
  * @return {number}
  */
 var maxProduct = function(nums) {
-  const sorted = nums.sort((a, b) => a - b);
-  const num1 = sorted.pop();
-  const num2 = sorted.pop();
-  
-  return (num1 - 1) * (num2 - 1);
+  const sorted = nums.sort((a, b) => b - a);
+  return (sorted[0] - 1) * (sorted[1] - 1);
 };
