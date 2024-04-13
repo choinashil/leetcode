@@ -3,16 +3,14 @@
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-  const map = {};
+  let i = 0;
 
-  for (let i = 0; i < nums.length; i++) {
-    if (map[nums[i]] === undefined) {
-      map[nums[i]] = true;
-    } else {
-      nums.splice(i, 1);
-      i--;
+  for (let j = 1; j < nums.length; j++) {
+    if (nums[i] !== nums[j]) {
+      i++;
+      nums[i] = nums[j];
     }
   }
 
-  return nums.length;
+  return i + 1;
 };
