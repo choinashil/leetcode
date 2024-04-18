@@ -3,19 +3,22 @@
  * @return {number}
  */
 var longestConsecutive = function(nums) {
-    const set = new Set(nums);
+    const map = {};
+    nums.forEach(num => map[num] = true);
 
     nums.sort((a, b) => a - b);
 
     let max = 0;
     let count = 0;
 
-    for (const value of set) {
-        if (set.has(value - 1)) {
+    const mapList = Object.keys(map);
+
+    for (let i = 0; i < mapList.length; i++) {
+        if (map[Number(mapList[i]) - 1]) {
             continue;
         }
 
-        while (set.has(value + count)) {
+        while (map[Number(mapList[i]) + count]) {
             count++;
         }
 
