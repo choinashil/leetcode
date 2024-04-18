@@ -28,7 +28,7 @@ var longestConsecutive = function (nums) {
 };
 ```
 
-# 1
+# 1. 내 풀이의 정돈된 버전
 
 ```js
 var longestConsecutive = function (nums) {
@@ -70,3 +70,67 @@ var longestConsecutive = function (nums) {
    이 코드에서는 중복일 때 그냥 건너띄도록 조건을 추가하여 좀 더 간단히 처리했다
 
 내가 가장 처음 떠올린 방식 그대로를 구현한 코드
+
+# 2. map 사용
+
+```js
+var longestConsecutive = function (nums) {
+  const map = {};
+  nums.forEach((num) => (map[num] = true));
+
+  nums.sort((a, b) => a - b);
+
+  let max = 0;
+  let count = 0;
+
+  const mapList = Object.keys(map);
+
+  for (let i = 0; i < mapList.length; i++) {
+    if (map[Number(mapList[i]) - 1]) {
+      continue;
+    }
+
+    while (map[Number(mapList[i]) + count]) {
+      count++;
+    }
+
+    max = Math.max(max, count);
+    count = 0;
+  }
+
+  return Math.max(max, count);
+};
+```
+
+# 3. set 사용
+
+```js
+var longestConsecutive = function (nums) {
+  const set = new Set(nums);
+
+  nums.sort((a, b) => a - b);
+
+  let max = 0;
+  let count = 0;
+
+  for (const value of set) {
+    if (set.has(value - 1)) {
+      continue;
+    }
+
+    while (set.has(value + count)) {
+      count++;
+    }
+
+    max = Math.max(max, count);
+    count = 0;
+  }
+
+  return Math.max(max, count);
+};
+```
+
+map 에 value 로 무의미한 값을 넣고 있는 부분이 걸리기도 하고,
+map 을 사용하는 이유가 중복값 제거 + O(1) 으로 접근하기 위함이어서
+그러려면 set 을 사용하는 것이 더 깔끔하게 작성 가능할 것 같았다
+has 메서드도 직관적이어서 좋은 듯
