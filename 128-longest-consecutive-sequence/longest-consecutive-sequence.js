@@ -3,26 +3,27 @@
  * @return {number}
  */
 var longestConsecutive = function(nums) {
+    const map = {};
+    nums.forEach(num => map[num] = true);
+
     nums.sort((a, b) => a - b);
 
     let max = 0;
     let count = 0;
 
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] === nums[i + 1]) {
-            nums.splice(i, 1);
-            i--;
+    const mapList = Object.keys(map);
+
+    for (let i = 0; i < mapList.length; i++) {
+        if (map[Number(mapList[i]) - 1]) {
             continue;
         }
 
-        if (nums[i] === nums[i+ 1] - 1) {
+        while (map[Number(mapList[i]) + count]) {
             count++;
-        } else {
-            if (max < count + 1) {
-                max = count + 1;
-            }
-            count = 0;
         }
+
+        max = Math.max(max, count);
+        count = 0;
     }
 
     return Math.max(max, count);
