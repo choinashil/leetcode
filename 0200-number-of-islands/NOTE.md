@@ -119,3 +119,19 @@ var numIslands = function (grid) {
 - visited 대신 grid[i][j] 를 '0' 으로 바꾸면서 다시 방문했을 때 건너뛰도록 함 (메모리 절약)
 - dfs + 재귀 사용해서 queue 없이 구현 (메모리 절약)
 - 각 방향별 예외 처리를 단순화하여 하나의 조건문으로 처리
+
+# 2
+
+```js
+const dx = [-1, 1, 0, 0];
+const dy = [0, 0, -1, 1];
+
+for (let i = 0; i < 4; i++) {
+  nextX = currentX + dx[i];
+  nextY = currentY + dy[i];
+
+  dfs(nextX, nextY);
+}
+```
+
+상하좌우 처리하는 부분을 다르게 작성한 코드
